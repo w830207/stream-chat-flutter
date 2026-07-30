@@ -20,6 +20,7 @@ class SharedDB {
     bool logStatements = false,
     ConnectionMode connectionMode = ConnectionMode.regular,
     bool webUseIndexedDbIfSupported = false, // Ignored on native
+    required String storageDirName,
   }) async {
     final dbName = 'db_$userId';
     if (connectionMode == ConnectionMode.background) {
@@ -29,6 +30,7 @@ class SharedDB {
           Future(() async {
             final isolate = await _createDriftIsolate(
               dbName,
+              storageDirName,
               logStatements: logStatements,
             );
             return isolate.connect();
@@ -42,6 +44,7 @@ class SharedDB {
       LazyDatabase(
         () async => _constructDatabase(
           dbName,
+          storageDirName,
           logStatements: logStatements,
         ),
       ),
@@ -49,7 +52,8 @@ class SharedDB {
   }
 
   static Future<NativeDatabase> _constructDatabase(
-    String dbName, {
+    String dbName,
+    String storageDirName, {
     bool logStatements = false,
   }) async {
     if (Platform.isIOS || Platform.isAndroid) {
@@ -58,10 +62,19 @@ class SharedDB {
       final file = File(path);
       return NativeDatabase(file, logStatements: logStatements);
     }
-    if (Platform.isMacOS || Platform.isLinux) {
+
+    if (Platform.isMacOS || Platform.isWindows) {
+      final dir = await getApplicationDocumentsDirectory();
+      final path = join(dir.path, storageDirName, '$dbName.sqlite');
+      final file = File(path);
+      return NativeDatabase(file, logStatements: logStatements);
+    }
+
+    if (Platform.isLinux) {
       final file = File('$dbName.sqlite');
       return NativeDatabase(file, logStatements: logStatements);
     }
+
     return NativeDatabase.memory(logStatements: logStatements);
   }
 
@@ -79,11 +92,12 @@ class SharedDB {
   }
 
   static Future<DriftIsolate> _createDriftIsolate(
-    String dbName, {
+    String dbName,
+    String storageDirName, {
     bool logStatements = false,
   }) async {
     final dir = await getApplicationDocumentsDirectory();
-    final path = join(dir.path, '$dbName.sqlite');
+    final path = join(dir.path, storageDirName, '$dbName.sqlite');
 
     final receivePort = ReceivePort();
     await Isolate.spawn(

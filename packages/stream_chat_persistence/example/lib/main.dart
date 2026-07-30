@@ -13,6 +13,7 @@ Future<void> main() async {
   client.chatPersistenceClient = StreamChatPersistenceClient(
     logLevel: Level.INFO,
     connectionMode: ConnectionMode.background,
+    storageDirName: 'stream_chat_persistence_example',
   );
 
   /// Set the current user. In a production scenario, this should be done using

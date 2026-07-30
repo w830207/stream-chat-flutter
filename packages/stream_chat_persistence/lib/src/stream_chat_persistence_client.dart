@@ -33,7 +33,9 @@ class StreamChatPersistenceClient extends ChatPersistenceClient {
     /// Otherwise, falls back to the local storage based implementation.
     bool webUseExperimentalIndexedDb = false,
     LogHandlerFunction? logHandlerFunction,
-  }) : _connectionMode = connectionMode,
+    required String storageDirName,
+  }) : _storageDirName = storageDirName,
+       _connectionMode = connectionMode,
        _webUseIndexedDbIfSupported = webUseExperimentalIndexedDb,
        _logger = Logger.detached('💽')..level = logLevel {
     _logger.onRecord.listen(logHandlerFunction ?? _defaultLogHandler);
@@ -46,6 +48,8 @@ class StreamChatPersistenceClient extends ChatPersistenceClient {
   final Logger _logger;
   final ConnectionMode _connectionMode;
   final bool _webUseIndexedDbIfSupported;
+
+  final String _storageDirName;
 
   void _defaultLogHandler(LogRecord record) {
     print(
@@ -76,6 +80,7 @@ class StreamChatPersistenceClient extends ChatPersistenceClient {
     userId,
     connectionMode: mode,
     webUseIndexedDbIfSupported: _webUseIndexedDbIfSupported,
+    storageDirName: _storageDirName,
   );
 
   @override
