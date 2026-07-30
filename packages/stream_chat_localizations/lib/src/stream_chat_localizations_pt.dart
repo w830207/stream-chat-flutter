@@ -262,6 +262,9 @@ class StreamChatLocalizationsPt extends GlobalStreamChatLocalizations {
   String get editMessageLabel => 'Editar mensagem';
 
   @override
+  String get forwardMessageLabel => 'Encaminhar mensagem';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return 'Reenviar mensagem alterada';
     return 'Reenviar';

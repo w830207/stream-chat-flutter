@@ -261,6 +261,9 @@ class StreamChatLocalizationsNo extends GlobalStreamChatLocalizations {
   String get editMessageLabel => 'Rediger melding';
 
   @override
+  String get forwardMessageLabel => 'Videresend melding';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return 'Send redigert melding på nytt';
     return 'Send på nytt';

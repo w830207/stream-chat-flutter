@@ -277,6 +277,14 @@ class StreamMessageActionsBuilder {
       );
     }
 
+    messageActions.add(
+      StreamContextMenuAction(
+        value: ForwardMessage(message: message),
+        label: Text(context.translations.forwardMessageLabel),
+        leading: Icon(icons.share),
+      ),
+    );
+
     return messageActions;
   }
 }

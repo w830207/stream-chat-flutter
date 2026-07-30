@@ -264,6 +264,9 @@ class StreamChatLocalizationsHi extends GlobalStreamChatLocalizations {
   String get editMessageLabel => 'संदेश एडिट करें';
 
   @override
+  String get forwardMessageLabel => 'मैसेज फ़ॉरवर्ड करें';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return 'एडिट संदेश फिर से भेजें';
     return 'पुन: भेजें';

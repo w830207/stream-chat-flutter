@@ -260,6 +260,9 @@ class StreamChatLocalizationsDe extends GlobalStreamChatLocalizations {
   String get editMessageLabel => 'Nachricht bearbeiten';
 
   @override
+  String get forwardMessageLabel => 'Nachricht weiterleiten';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return 'Bearbeitete Nachricht erneut senden';
     return 'Erneut senden';

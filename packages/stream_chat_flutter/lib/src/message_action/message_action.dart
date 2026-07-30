@@ -160,3 +160,9 @@ final class ThreadReply extends MessageAction {
   /// Create a new thread reply action
   const ThreadReply({required super.message});
 }
+
+ /// 選中message 開始進行多選，以便轉發等操作
+final class ForwardMessage extends MessageAction {
+  /// Create a new forward message action
+  const ForwardMessage({required super.message});
+}

@@ -269,6 +269,9 @@ Il file è troppo grande per essere caricato. Il limite è di $limitInMB MB.''';
   String get editMessageLabel => 'Modifica messaggio';
 
   @override
+  String get forwardMessageLabel => 'Inoltra messaggio';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return 'Riprova modifica messaggio';
     return 'Riprova';

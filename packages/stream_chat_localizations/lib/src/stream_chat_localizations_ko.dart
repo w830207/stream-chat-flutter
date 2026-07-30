@@ -257,6 +257,9 @@ class StreamChatLocalizationsKo extends GlobalStreamChatLocalizations {
   String get editMessageLabel => '메시지를 편집합니다.';
 
   @override
+  String get forwardMessageLabel => '메시지 전달';
+
+  @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
     if (isUpdateFailed) return '편집된 메시지를 다시 보냅니다.';
     return '다시 보냅니다.';

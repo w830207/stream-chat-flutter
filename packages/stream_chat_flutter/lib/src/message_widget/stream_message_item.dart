@@ -180,6 +180,7 @@ class StreamMessageItemProps {
     this.onBouncedErrorMessageActions,
     this.onEditMessageTap,
     this.attachmentBuilders,
+    this.onForwardMessageTap,
   }) : assert(
          onReactionsTap == null || onReactionTap == null,
          'Only one of onReactionsTap or onReactionTap can be provided. '
@@ -361,6 +362,9 @@ class StreamMessageItemProps {
   /// Called when the edit-message action is selected.
   final void Function(Message message)? onEditMessageTap;
 
+  /// Called when the forward-message action is selected.
+  final void Function(Message message)? onForwardMessageTap;
+
   /// Custom attachment builders for rendering message attachments.
   ///
   /// When non-null, these builders are used instead of the default ones
@@ -398,6 +402,7 @@ class StreamMessageItemProps {
     void Function(BuildContext, Message)? onBouncedErrorMessageActions,
     void Function(Message)? onEditMessageTap,
     List<StreamAttachmentWidgetBuilder>? attachmentBuilders,
+    void Function(Message)? onForwardMessageTap,
   }) {
     return StreamMessageItemProps(
       message: message ?? this.message,
@@ -424,6 +429,7 @@ class StreamMessageItemProps {
       onBouncedErrorMessageActions: onBouncedErrorMessageActions ?? this.onBouncedErrorMessageActions,
       onEditMessageTap: onEditMessageTap ?? this.onEditMessageTap,
       attachmentBuilders: attachmentBuilders ?? this.attachmentBuilders,
+      onForwardMessageTap: onForwardMessageTap ?? this.onForwardMessageTap,
     );
   }
 }
@@ -896,6 +902,7 @@ class DefaultStreamMessageItem extends StatelessWidget {
     ResendMessage() => channel.retryMessage(action.message),
     QuotedReply() => props.onReplyTap?.call(action.message),
     ThreadReply() => props.onThreadTap?.call(action.message, null),
+    ForwardMessage() => props.onForwardMessageTap?.call(action.message),
   };
 
   // Copies the message text (with mentions replaced) to the clipboard.
