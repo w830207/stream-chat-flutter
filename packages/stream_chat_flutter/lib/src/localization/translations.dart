@@ -276,6 +276,9 @@ abstract class Translations {
   /// The label for "edit message"
   String get editMessageLabel;
 
+  /// The label for "forward message"
+  String get forwardMessageLabel;
+
   /// The text for showing resend/resend-edited message
   /// based on [isUpdateFailed]
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed});
@@ -1015,6 +1018,9 @@ class DefaultTranslations implements Translations {
 
   @override
   String get editMessageLabel => 'Edit Message';
+
+  @override
+  String get forwardMessageLabel => 'Forward Message';
 
   @override
   String toggleResendOrResendEditedMessage({required bool isUpdateFailed}) {
