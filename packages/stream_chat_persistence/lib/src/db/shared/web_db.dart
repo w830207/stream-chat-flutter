@@ -14,8 +14,9 @@ class SharedDB {
     bool logStatements = false,
     ConnectionMode connectionMode = ConnectionMode.regular, // Ignored on web
     bool webUseIndexedDbIfSupported = false,
+    required String storageDirName,
   }) async {
-    final dbName = 'db_$userId';
+    final dbName = 'db_${storageDirName}_$userId';
     final queryExecutor = await _getQueryExecutor(
       dbName,
       useIndexedDbIfSupported: webUseIndexedDbIfSupported,
