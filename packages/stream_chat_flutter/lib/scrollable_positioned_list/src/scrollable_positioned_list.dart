@@ -470,9 +470,9 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList> wit
       // Anchor preservation. Only fires when the item set actually
       // changed (different count), so it doesn't interfere with
       // ordinary user scrolling on rebuilds that don't touch the list.
-      if (widget.itemCount != oldWidget.itemCount) {
-        _updateFirstVisibleItemIfNeeded();
-      }
+      // if (widget.itemCount != oldWidget.itemCount) {
+      //   _updateFirstVisibleItemIfNeeded();
+      // }
     }
   }
 
