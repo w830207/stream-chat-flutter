@@ -57,7 +57,7 @@ class UnboundedCustomScrollView extends CustomScrollView {
         slivers: slivers,
         cacheExtent: cacheExtent,
         center: center,
-        anchor: anchor,
+        anchor: 0.5,
       );
     }
     return UnboundedViewport(
@@ -66,7 +66,7 @@ class UnboundedCustomScrollView extends CustomScrollView {
       slivers: slivers,
       cacheExtent: cacheExtent,
       center: center,
-      anchor: anchor,
+      anchor: 0.5,
     );
   }
 }
